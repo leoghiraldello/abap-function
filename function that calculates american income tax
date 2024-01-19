@@ -1,0 +1,98 @@
+FUNCTION Z_FUNCTION_INCOMETAX.
+*"----------------------------------------------------------------------
+*"*"Interface local:
+*"  IMPORTING
+*"     REFERENCE(INCOME) TYPE  P
+*"     REFERENCE(INCOME_BASED_GROUP) TYPE  I
+*"  EXPORTING
+*"     REFERENCE(ANNUAL_TAX) TYPE  P
+*"  EXCEPTIONS
+*"      INCOME_NOT_NULL
+*"      INCOME_BASED_GROUP_CRITERIA
+*"----------------------------------------------------------------------
+if income = 0.
+  raise income_not_null.
+ELSEIF income_based_group < 1 or income_based_group > 4.
+  raise income_based_group_criteria.
+ENDIF.
+
+
+if income_based_group = 1.
+  if income <= 11000.
+    annual_tax = income * 10 / 100.
+  elseif income >= 11001 and income <= 44725.
+    annual_tax = income * 12 / 100.
+  elseif income >= 44726 and income <= 95375.
+    annual_tax = income * 22 / 100.
+  elseif income >= 95376 and income <= 182100.
+    annual_tax = income * 24 / 100.
+  elseif income >= 182101 and income <= 231250.
+    annual_tax = income * 32 / 100.
+  elseif income >= 231251 and income <= 578125.
+    annual_tax = income * 35 / 100.
+  elseif income >= 578126.
+    annual_tax = income * 37 / 100.
+  endif.
+ENDIF.
+
+if income_based_group = 2.
+  if income <= 22000.
+    annual_tax = income * 10 / 100.
+  elseif income >= 22001 and income <= 89450.
+    annual_tax = income * 12 / 100.
+  elseif income >= 89451 and income <= 190750.
+    annual_tax = income * 22 / 100.
+  elseif income >= 190751 and income <= 364200.
+    annual_tax = income * 24 / 100.
+  elseif income >= 364201 and income <= 462500.
+    annual_tax = income * 32 / 100.
+  elseif income >= 462501 and income <= 693750.
+    annual_tax = income * 35 / 100.
+  elseif income >= 693751.
+    annual_tax = income * 37 / 100.
+  endif.
+ENDIF.
+
+if income_based_group = 3.
+  if income <= 15700.
+    annual_tax = income * 10 / 100.
+  elseif income >= 15701 and income <= 59850.
+    annual_tax = income * 12 / 100.
+  elseif income >= 59851 and income <= 95350.
+    annual_tax = income * 22 / 100.
+  elseif income >= 95351 and income <= 182100.
+    annual_tax = income * 24 / 100.
+  elseif income >= 182101 and income <= 231250.
+    annual_tax = income * 32 / 100.
+  elseif income >= 231251 and income <= 578100.
+    annual_tax = income * 35 / 100.
+  elseif income >= 578101.
+    annual_tax = income * 37 / 100.
+  endif.
+ENDIF.
+
+if income_based_group = 4.
+  if income <= 11000.
+    annual_tax = income * 10 / 100.
+  elseif income >= 11001 and income <= 44725.
+    annual_tax = income * 12 / 100.
+  elseif income >= 44726 and income <= 95375.
+    annual_tax = income * 22 / 100.
+  elseif income >= 95376 and income <= 182100.
+    annual_tax = income * 24 / 100.
+  elseif income >= 182101 and income <= 231250.
+    annual_tax = income * 32 / 100.
+  elseif income >= 231251 and income <= 346875.
+    annual_tax = income * 35 / 100.
+  elseif income >= 346876.
+    annual_tax = income * 37 / 100.
+  endif.
+ENDIF.
+
+
+
+
+
+
+
+ENDFUNCTION.

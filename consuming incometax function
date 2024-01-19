@@ -1,0 +1,32 @@
+REPORT Z_AMERICAN_INCOMETAX.
+
+PARAMETERS: p_income type p decimals 2,
+            p_group type i.
+
+data d_tax type p decimals 2.
+
+START-OF-SELECTION.
+
+CALL FUNCTION 'Z_FUNCTION_INCOMETAX'
+  EXPORTING
+    INCOME                            = p_income
+    INCOME_BASED_GROUP                = p_group
+ IMPORTING
+   ANNUAL_TAX                        = d_tax
+ EXCEPTIONS
+   INCOME_NOT_NULL                   = 1
+   INCOME_BASED_GROUP_CRITERIA       = 2
+   OTHERS                            = 3.
+
+IF SY-SUBRC = 1.
+  message 'Income field should not be null' type 'E'.
+ELSEIF sy-subrc = 2.
+  message 'Only numbers from 1-4 are accepted' type 'E'.
+ENDIF.
+
+write: / 'Your annual income is:',
+          p_income,
+       / 'You belong to the income based group number:',
+          p_group,
+       /  'Your annual tax will be:',
+          d_tax.
